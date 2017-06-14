@@ -13,7 +13,7 @@ jobs:
 
   deploy:
     machine:
-      enabled: true
+        enabled: true
     working_directory: ~/workflows_branch_filter
     steps:
       - checkout
@@ -25,8 +25,8 @@ workflows:
     jobs:
       - build
       - deploy:
-        requires:
-          -builds
-        filters:
-          branches:
-            only: master
+          requires:
+            - builds
+          filters:
+            branches:
+              only: master
