@@ -12,7 +12,7 @@ jobs:
       - run: bundle install --path vendor/bundle
 
       # Database setup
-      - run: bundle exec rake db:schema:load
+      - run: bundle exec rake db:create db:schema:load
 
       - run:
           name: Run tests
@@ -31,7 +31,7 @@ jobs:
       - run:
           command: |
             git push heroku master
-            heroku run rake db:create db:migrate
+            heroku run rake db:migrate
             sleep 5 # sleep for 5 seconds to wait for dynos
             heroku restart
 
