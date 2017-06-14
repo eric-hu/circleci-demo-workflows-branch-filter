@@ -1,0 +1,32 @@
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4
+    working_directory: ~/workflows_branch_filter
+    steps:
+      - checkout
+      - run:
+          name: Run tests
+          command: rake
+
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/workflows_branch_filter
+    steps:
+      - checkout
+      - run scripts/deploy.sh
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+        requires:
+          -builds
+        filters:
+          branches:
+            only: master
