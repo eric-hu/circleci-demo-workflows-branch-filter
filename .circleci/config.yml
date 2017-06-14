@@ -19,7 +19,11 @@ jobs:
     working_directory: ~/workflows_branch_filter
     steps:
       - checkout
-      - run scripts/deploy.sh
+      - run:
+          command: |
+            git push heroku master
+            heroku run rake db:migrate
+            heroku restart
 
 workflows:
   version: 2
