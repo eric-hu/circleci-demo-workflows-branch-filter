@@ -7,6 +7,8 @@ jobs:
     working_directory: ~/workflows_branch_filter
     steps:
       - checkout
+      # Bundle install dependencies
+      - run: bundle install --path vendor/bundle
       - run:
           name: Run tests
           command: rake
